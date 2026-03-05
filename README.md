@@ -63,6 +63,15 @@ python src/ingest.py
 python src/chat.py
 ```
 
+### Sobre o Docker e a extensao pgVector
+
+O `docker-compose` sobe dois servicos:
+
+- **postgres**: PostgreSQL com a imagem `pgvector/pgvector`, que inclui o suporte a vetores.
+- **bootstrap_vector_ext**: Executa o script `scripts/bootstrap-vector.sh`, que cria a extensao `vector` no banco `rag-mba` com `CREATE EXTENSION IF NOT EXISTS vector;`.
+
+A extensao e necessaria para que o LangChain/PGVector possa criar tabelas com colunas do tipo vetorial e armazenar os embeddings. Sem ela, o `python src/ingest.py` falharia com erro relacionado a extensao vetorial.
+
 ## Provedores Suportados
 
 | Provedor | Embedding Model | LLM Model |
