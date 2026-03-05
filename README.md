@@ -26,15 +26,29 @@ pip install -r requirements.txt
 
 3. Configure o arquivo `.env` a partir do exemplo:
 
+**Linux / macOS:**
+
 ```bash
 cp .env.example .env
+```
+
+**Windows (CMD):**
+
+```cmd
+copy .env.example .env
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Copy-Item .env.example .env
 ```
 
 Preencha no `.env`:
 - A chave de API do provedor escolhido (`OPENAI_API_KEY` ou `GOOGLE_API_KEY`)
 - `DATABASE_URL` — string de conexao com o PostgreSQL (ex: `postgresql+psycopg://postgres:postgres@localhost:5434/rag-mba`)
 - `PG_VECTOR_COLLECTION_NAME` — nome da colecao vetorial (ex: `mba_chunks`)
-- `PDF_PATH` — caminho absoluto para o PDF a ser ingerido (ex: `db/document.pdf`)
+- `PDF_PATH` — caminho para o PDF a ser ingerido (ex: `document.pdf` na raiz do projeto, ou caminho absoluto como `C:\projeto\document.pdf` no Windows)
 
 ## Ordem de Execucao
 
@@ -53,7 +67,7 @@ python src/chat.py
 
 | Provedor | Embedding Model | LLM Model |
 |----------|----------------|-----------|
-| OpenAI   | `text-embedding-3-small` | `gpt-4o-mini` |
+| OpenAI   | `text-embedding-3-small` | `gpt-5-nano` |
 | Google   | `models/embedding-001` | `gemini-2.5-flash-lite` |
 
 O sistema detecta automaticamente qual provedor usar com base na presenca da variavel `OPENAI_API_KEY` no `.env`. Se presente, usa OpenAI; caso contrario, usa Google.
